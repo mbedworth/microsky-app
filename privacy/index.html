@@ -12,24 +12,59 @@
     <img src="../icon.png" alt="">
     <div>
       <h1>Privacy Policy</h1>
-      <p class="lede">MicroSky, effective 25 October 2026</p>
+      <p class="lede">MicroSky, updated 25 October 2026</p>
     </div>
   </header>
   <nav><a href="../">Support</a><a href="./">Privacy Policy</a></nav>
 
-  <p>MicroSky has no account, no advertising and no tracking. It does not collect personal data
-    on a server of its own: there is none. This page says what leaves your device and why.</p>
+  <p>MicroSky has no account, no advertising and no tracking, and keeps no logs of requests. This
+    page says what leaves your device, where it goes and how long anything is kept.</p>
 
-  <h2>Your places and location</h2>
+  <h2>Where you are stays on your device</h2>
   <p>The places you save, and your settings, stay on your devices: your iPhone or iPad, and your
     Apple Watch and widgets, which share them on the device.</p>
-  <p>To get the weather for a place, MicroSky sends that place's coordinates to the weather
-    services that cover it: Apple Weather, the US National Weather Service, Environment and
-    Climate Change Canada, Deutscher Wetterdienst (through Bright Sky), Open-Meteo and MET
-    Norway. It also sends them to the US Geological Survey or Open-Meteo for the ground's height
-    there. Searching for a place uses Apple's place search. If you allow location access,
-    your current location is used in the same way, only to show its weather. None of these
-    requests carries your name, an account or an identifier for you.</p>
+  <p>MicroSky divides the map into squares about a kilometre across (0.01&deg; of latitude and
+    longitude). Whenever it asks about a place, it asks about the centre of the square the place
+    is in, never the place itself. Your device works out the square; your exact position is never
+    sent. The centre is always less than 800&nbsp;m from anywhere in its square, and the forecasts
+    behind MicroSky work on grids of about 1 to 13&nbsp;km, so the answer is almost always the
+    same as for your doorstep.</p>
+  <p>Your exact position is used only on your device: to find the nearest weather and tide
+    stations, and to draw the sun, moon and sky behind the forecast. If you allow location access,
+    your current location is used the same way, only to show its weather.</p>
+
+  <h2>What leaves your device</h2>
+  <ul>
+    <li><strong>For a forecast:</strong> the centre of the place's square and its height, with
+      nothing that identifies you or your device. With Forecasts on under From MicroSky's Server
+      in Settings, as it is unless you turn it off, this goes to MicroSky's server, which asks the free weather
+      services for the square (the US National Weather Service, Environment and Climate Change
+      Canada, Deutscher Wetterdienst through Bright Sky, and MET Norway) and sends their answers
+      back together. Turned off, your device asks those services itself.</li>
+    <li><strong>For Apple Weather:</strong> your device asks Apple Weather directly, under Apple's
+      own privacy terms.</li>
+    <li><strong>For air quality, if you turn it on:</strong> the centre of the place's square, sent
+      to MicroSky's server, which answers from the AirNow figures it already holds.</li>
+    <li><strong>For a place's name and height:</strong> the centre of its square, sent to Apple's
+      place search and to the US Geological Survey or Open-Meteo.</li>
+    <li><strong>For tides:</strong> only the tide station chosen on your device is asked, through
+      NOAA.</li>
+  </ul>
+
+  <h2>MicroSky's server</h2>
+  <p>The server keeps a square's weather only while it is fresh, from a couple of minutes for
+    alerts to half an hour for forecasts, so other people in the same square get the same answer
+    without asking the services again. It keeps a square's lookups (which forecast grid and
+    stations it falls in) until nobody has asked about it for 14 days. None of this records who
+    asked.</p>
+  <p>If you turn on a setting under While MicroSky Is Closed, the server keeps each place you ask
+    it to watch, as the centre of its square, with its name and time zone, a random ID for your
+    device that is not tied to you, and Apple's push tokens so it can reach your device. It keeps
+    these only while a setting is on, and deletes them when you turn the last one off or after
+    30 days without hearing from your device.</p>
+  <p>Requests to the server pass through Cloudflare, which sees your internet address as part of
+    delivering them, as it does for any website it serves. The server reaches MET Norway and
+    Environment Canada through Cloudflare too, passing on the same square and nothing more.</p>
 
   <h2>Your weather station</h2>
   <p>If you connect a weather station, the token or keys you enter are kept in your device's
@@ -42,11 +77,12 @@
     as downloads and crashes, which do not identify you.</p>
 
   <h2>The services MicroSky uses</h2>
-  <p>Each weather service receives the coordinates it is asked about and handles them under its
-    own privacy policy. MicroSky does not sell or share your data with anyone else.</p>
+  <p>Each weather service receives the square it is asked about and handles it under its own
+    privacy policy. MicroSky does not sell or share your data with anyone else.</p>
 
   <h2>Children</h2>
-  <p>MicroSky is suitable for all ages and collects nothing from anyone, children included.</p>
+  <p>MicroSky is suitable for all ages and collects nothing that identifies anyone, children
+    included.</p>
 
   <h2>Changes</h2>
   <p>If this policy changes, the new version will be posted here with its date.</p>
