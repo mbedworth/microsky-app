@@ -12,7 +12,7 @@
     <img src="../icon.png" alt="">
     <div>
       <h1>Privacy Policy</h1>
-      <p class="lede">MicroSky, updated 15 November 2026</p>
+      <p class="lede">MicroSky, updated 20 November 2026</p>
     </div>
   </header>
   <nav><a href="../">Support</a><a href="./">Privacy Policy</a></nav>
@@ -54,15 +54,15 @@
 </li>
 <li>Your phone does not send the place's height. It sends nothing that identifies you or your phone.
 </li>
-<li>The server asks the free weather services about the square. It merges their answers into one forecast. It uses the same code as the app.
+<li>The server asks the free weather services about the square. It sends your phone each free service's forecast for the square, one beside the other, and merges the current conditions and alerts. It uses the same code as the app.
 </li>
-<li>Your phone adds Apple Weather, your own stations and your own Open-Meteo key to that forecast.
+<li>Your phone blends those forecasts into one, with your own Open-Meteo key where you have one. Your own stations give the current conditions.
 </li>
 <li>For current conditions in or near the United States, Canada and Germany, your phone also asks the national weather service itself about the square. It picks among the service's stations using the place's height and your choices. The service is not sent the height.
 </li>
 <li>Your phone also asks a national service itself for the square's alerts when the server could not get them.
 </li>
-<li>The server keeps a square's answers. It also keeps the merged forecast, with the time zone and language it was asked in. It keeps them until nobody has asked about the square for two hours.
+<li>The server keeps a square's answers. It also keeps the forecasts it sends, with the time zone and language it was asked in. It keeps them until nobody has asked about the square for two hours.
 </li>
 <li>The server keeps its lookups (which weather grid and stations the square falls in) until nobody has asked about the square for 14 days.
 </li>
@@ -88,6 +88,23 @@
 </li>
 <li>History.
 </li></ul>
+</li></ul>
+</li>
+<li><strong>For rain by the minute, MicroSkyCast, with a subscription and while Use MicroSky's Server is on.</strong> MicroSkyCast is MicroSky's own rain forecast. MicroSky makes it from NOAA's public radar. It does not come from NOAA or from Apple.
+<ul>
+<li>Your iPhone asks the MicroSky server about the square. Your watch shows what your iPhone read. The request names the square, about a kilometre across, and nothing else about the place. The server answers that it has nothing where its radar does not reach, which is everywhere outside the United States.
+</li>
+<li>The request carries Apple's signed record of your plan, and a signature from your phone's own key. They show that you subscribe. They do not say who you are.
+</li>
+<li>The server answers with words and a band: rain falling now, or likely within 15 or 30 minutes, and how hard. It does not send minutes or a time for the rain to start or stop, and the words are shown as sent, never counted down.
+</li>
+<li>The server keeps no record of who asked. It counts how many reads a connection or day pass makes, as it counts everything else (see "Good to know," below). It also notes which squares were asked about, in memory only, for the same 30 minutes, with nothing that says who asked.
+</li>
+<li>Too many devices must not read for one plan. So the server remembers, in memory only, a scrambled ID for the plan and for each device that read for it. It forgets a device 36 hours after its last read. It also remembers that a day pass's plan was checked. It keeps that until the day or the plan ends.
+</li>
+<li>To answer, the server asks the free forecast sources for the square's air temperature. Then it can hold rain back where it may be snow. It also holds the last 16 minutes of NOAA's radar for the area around the place (a square 2° across), in memory only. It holds it by area, not by person. It writes none of it to disk. It lets go of it 30 minutes after anyone last asked about the area, and when the server restarts.
+</li>
+<li>Nothing is sent to Apple, and no Apple weather service is asked.
 </li></ul>
 </li>
 <li><strong>For a place's name and height.</strong> The middle of the place's square is what is sent. Sometimes Apple cannot name My Location. Sometimes Apple cannot give the time zone of My Location, or of a place saved without one. If Use MicroSky's Server is on, the square alone is then sent to the MicroSky server too. The server answers from a time zone map and a town list it holds. It asks no one else. It keeps nothing about who asked.
@@ -195,11 +212,11 @@
 </li>
 <li>Which notices it has already sent, so none comes twice.
 </li>
-<li>When it last started, updated or first heard of each rain countdown on your Lock Screen. This lets it end a countdown it can no longer keep current, once the countdown's last minutes are over an hour old. It forgets this when the countdown ends.
+<li>When it last started, updated or first heard of each rain Live Activity on your Lock Screen. This lets it end one it can no longer keep current, once the radar picture it was given is over an hour old. It forgets this when the Live Activity ends.
 </li>
-<li>Which rain countdowns on the Lock Screen you closed. They stay closed for up to six hours.
+<li>Which rain Live Activities on the Lock Screen you closed. They stay closed for up to six hours.
 </li>
-<li>One word for each rain countdown on your Lock Screen. It says what the countdown last showed falling: rain, snow, sleet, hail, or rain and snow. The word is the one the server sent, or the one your iPhone says. The countdown can then say so when it ends.
+<li>One word for each rain Live Activity on your Lock Screen. It says what the Live Activity last showed falling. MicroSkyCast speaks of rain only, so the word is rain. The word is the one the server sent, or the one your iPhone says. The Live Activity can then say so when it ends.
 </li>
 <li>With a subscription, the date your plan ends. It reads this from Apple's signed record of your plan. It uses the date to know how long to watch for rain. Nothing else about the purchase is kept.
 </li></ul>
@@ -208,13 +225,13 @@
 </li>
 <li>In the contiguous United States, the server reads NOAA's radar picture of the whole country every few minutes. It is the same for everyone. Nothing about you or the place goes with it.
 </li>
-<li>Where that picture shows nothing falling within about 120 km, the server does not ask Apple about a watched square. There are two exceptions. About once a month it asks, to keep knowing that Apple has rain by the minute there. It also asks when a rain countdown there is running or was closed.
+<li>From that picture the server works out MicroSkyCast's words for each place it watches. It asks no one else for rain, and it does not ask Apple.
 </li>
-<li>Where radar cannot see, it asks Apple as usual.
+<li>Where radar cannot see, or the air is near freezing, it says nothing about rain there.
 </li>
-<li>The weather it fetches to watch a place is kept only as any square's answers are (see "For a forecast," above). Nothing about who asked is kept with it. So a watched square's alerts stay while it is watched, and for two hours after. The one other thing it keeps is the one word for each rain countdown, described above.
+<li>The weather it fetches to watch a place is kept only as any square's answers are (see "For a forecast," above). Nothing about who asked is kept with it. So a watched square's alerts stay while it is watched, and for two hours after. The one other thing it keeps is the one word for each rain Live Activity, described above.
 </li>
-<li>So that one plan cannot be passed around to strangers, the server also counts how many devices each plan has rain watched for at a time. Up to 10 are allowed, so a family can share a plan.
+<li>So that one plan cannot be passed around to strangers, the server also counts how many devices each plan has rain watched for at a time. Up to 24 are allowed, so a family can share a plan.
 </li>
 <li>It counts with the plan's ID (or a test install's ID) and each device's ID. Both are scrambled. It counts in memory only.
 </li>
@@ -224,9 +241,9 @@
 </li>
 <li>It deletes the rest when you turn the last setting off, except what the morning forecast still uses. It also deletes the rest after 30 days without hearing from your phone.
 </li>
-<li>Apart from any phone, the server keeps notes about each square it has checked, and about each block of 10 by 10 squares (0.1°). A note says whether Apple forecasts rain by the minute there. For squares, a note also says whether the US National Weather Service, Environment Canada, Germany's DWD or, through MeteoAlarm, another European service issues alerts there.
+<li>Apart from any phone, the server keeps notes about each square it has checked. A note says whether the US National Weather Service, Environment Canada, Germany's DWD or, through MeteoAlarm, another European service issues alerts there.
 </li>
-<li>The notes mean the server asks once a month, not for every phone.
+<li>The notes mean the server works out coverage once, not for every phone.
 </li>
 <li>The server watches each place as it told your phone, never by these notes.
 </li>
@@ -299,7 +316,8 @@
 <li>Nothing that names you or your phone goes with the report. The server keeps the time it arrived only to the hour, so no reply can be sent. Reports are deleted after 90 days.
 </li></ul>
 </li></ul>
-<p>MicroSky keeps no logs of requests. It has no accounts, analytics or advertising.</p>
+<p>MicroSky keeps no logs of requests, and nothing about who asked. It has no accounts, analytics about you, or advertising.</p>
+<p>The server does count its own work, for its owner alone. It counts how many requests each route answered in a day, how many failed and how long they took. It also measures its own memory and speed. These counts hold no address, ID or place, and no request is recorded with its time. Counts of requests by route are kept 400 days, except routes that register a device, make a key or pass, or send a report, which are kept 90. Counts of callers and devices are kept 90 days, since while few people use the app they could describe one person's use. Calls to each weather source are kept 60 days. Memory and speed are measured every 5 minutes and kept 7 days, then kept as hours for 90 days and as days for 400. The server also checks its own rain statements against the rain gauges at public airports. It holds those statements for about a week, until the gauges are in. Then it keeps only how many were right, by day, region and kind of statement, for 400 days. No one's place or request feeds this.</p>
 <h2>Good to know</h2>
 <ul>
 <li><strong>Cloudflare.</strong> Requests to the MicroSky server pass through Cloudflare. Cloudflare sees your internet address as part of delivering them, like any website does.
@@ -329,7 +347,7 @@
 </li>
 <li>Problem reports, and asking for a pass, are always counted by the address.
 </li>
-<li>Nothing of this is logged or stored except the day's totals. They name no one. They are:
+<li>Nothing of this is logged or stored except the day's totals. They name no one, and are kept 90 days. The bytes sent are kept 400, and the calls to each source 60. They are:
 <ul>
 <li>How many callers there were with a pass and without, what they used, the most one used, and how many ran out.
 </li>
@@ -345,17 +363,13 @@
 </li>
 <li>The bytes sent.
 </li>
-<li>The calls it made to the NWS and Bright Sky, and through its IPv4 way out.
+<li>The calls it made to the NWS and Bright Sky, and through its IPv4 way out. These are kept 60 days.
 </li>
-<li>How many times it asked Apple's WeatherKit each day. This is kept 60 days.
-</li>
-<li>How many keys are held.
+<li>How many keys are held, and how many devices are registered, in all and for each notice.
 </li></ul>
 </li></ul>
 </li>
 <li><strong>Warnings are checked for the middle of the square.</strong> A warning drawn to end between the middle and your exact position could be missed for a few hundred metres at its edge. Warning areas are drawn to about a kilometre themselves. Checking the whole square is planned.
-</li>
-<li><strong>Apple Weather.</strong> Your phone asks Apple Weather directly, under Apple's own privacy terms.
 </li>
 <li><strong>Your own stations and keys.</strong> You can connect a weather station or add your own Open-Meteo key. The token or keys you enter are kept in your Keychain. iCloud Keychain shares your Keychain with your other Apple devices, if you use it. The token or keys are sent only to that service: Tempest, Davis WeatherLink, Ambient Weather, Ecowitt, Weather Underground or Open-Meteo.
 </li>
@@ -391,7 +405,7 @@
 </li>
 <li><strong>Done: forecasts from the server, worldwide.</strong> Your phone asks once for each place, not several times. This saves battery and data. Your phone still asks the services itself whenever the server cannot answer.
 </li>
-<li><strong>Done: one merged forecast for each square.</strong> The server merges the free sources once for everyone in a square, with the app's own code. Your phone no longer sends a place's height to get it.
+<li><strong>Done: the free forecasts for each square.</strong> The server fetches the free sources once for everyone in a square and sends each one's forecast, and your phone blends them with the app's own code. Your phone no longer sends a place's height to get it.
 </li></ol>
 
   <h2>Analytics</h2>
