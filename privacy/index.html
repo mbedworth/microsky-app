@@ -164,6 +164,8 @@
 <li>Which layers you chose stays in MicroSky's settings on your iPhone.
 </li></ul>
 </li>
+<li><strong>For the hourly chance of rain, with Use MicroSky's Server on.</strong> Nothing about you or your places is sent. Your phone asks the MicroSky server for the current model of the chance, which is a few numbers, the same for everyone. It asks at most once a day. The request says only which build family the app is, as one whole number. It carries no place and no identifier. Your phone works out for itself what the numbers do to the forecast. The server keeps nothing about who asked, except the day's count by build family and answer (see below).
+</li>
 <li><strong>For alerts in Europe outside Germany, with Use MicroSky's Server on.</strong> The alerts come with the forecast.
 <ul>
 <li>When the server cannot send the merged forecast, your phone asks it for the alerts. It sends the middle of the place's square alone. It sends nothing that identifies you or your phone.
@@ -299,6 +301,25 @@
 <li>The server never records which phone a pass went to. So it says nothing about who you are.
 </li></ul>
 </li>
+<li><strong>If you answer "Did it rain here?"</strong> MicroSky asks this only after a rain notice, and sends something only when you tap an answer. If you don't answer, nothing is sent. After 3 hours the question is dropped.
+<ul>
+<li>Your phone sends your answer: yes, no, or snow or sleet.
+</li>
+<li>It sends the hour of the notice, and the area you were in. The area is about 11 km (7 miles) wide. It sends what the notice said, such as "rain within 15 minutes".
+</li>
+<li>It sends nothing else. There is no ID, push token, name, place, language or exact time. It shows the day pass it shows for every request.
+</li>
+<li>The server adds your answer to a count for that area and hour, and forgets the rest. It does not keep the answer by itself, and it does not keep who sent it.
+</li>
+<li>It keeps the counts for 14 days, by area and hour. Then it adds each day up for a block about 111 km (69 miles) wide, and keeps those for 400 days.
+</li>
+<li>The server sends the notices, so it could in theory match an answer to the phone it notified. It does not. The code that takes answers never opens the list of phones, and a test checks that.
+</li>
+<li>One phone's pass can answer once for an area's hour, and 10 times a day. The server counts this in memory, and forgets it when the day ends.
+</li>
+<li>Turning off Ask If It Rained in Settings removes the question and deletes any answer still waiting on your phone.
+</li></ul>
+</li>
 <li><strong>If you report a problem.</strong> This is what is sent:
 <ul>
 <li>What you write.
@@ -328,8 +349,8 @@
 </li></ul>
 </li></ul>
 <p>MicroSky keeps no logs of requests, and nothing about who asked. It has no accounts, analytics about you, or advertising.</p>
-<p>The server does count its own work, for its owner alone. It counts how many requests each route answered in a day, how many failed and how long they took. It also measures its own memory and speed. These counts hold no address, ID or place, and no request is recorded with its time. Counts of requests by route are kept 400 days, except routes that register a device, make a key or pass, or send a report, which are kept 90. Counts of callers and devices are kept 90 days, since while few people use the app they could describe one person's use. Calls to each weather source are kept 60 days. Memory and speed are measured every 5 minutes and kept 7 days, then kept as hours for 90 days and as days for 400. The server also checks its own rain statements against the rain gauges at public airports. It holds those statements for about a week, until the gauges are in. Then it keeps only how many were right, by day, region and kind of statement, for 400 days. No one's place or request feeds this. The server also checks the hourly forecast at those airports. It holds the forecast values for public airports for 3 days, until the reports are in. Then it keeps only counts by source and lead group for 400 days. These are public forecasts and the airports' own reports. Nothing about a person, a phone or a place anyone asked about goes into them.</p>
-<p>MicroSky keeps no personal data except what is listed above. Separately, MicroSky's server keeps a table of public weather data to improve its forecasts. It holds what NOAA's weather models predicted near about a hundred public airports, what the National Weather Service forecast for them, and what those airports reported. That table is not the forecast values held for 3 days above: it holds public forecasts and reports, and nothing about you, your phone or your places. The table has no set end date. The NOAA files the job downloads to fill it are deleted after 1 day.</p>
+<p>The server does count its own work, for its owner alone. It counts how many requests each route answered in a day, how many failed and how long they took. It also measures its own memory and speed. These counts hold no address, ID or place, and no request is recorded with its time. Counts of requests by route are kept 400 days, except routes that register a device, make a key or pass, or send a report, which are kept 90. Counts of callers and devices are kept 90 days, since while few people use the app they could describe one person's use. Calls to each weather source are kept 60 days. Memory and speed are measured every 5 minutes and kept 7 days, then kept as hours for 90 days and as days for 400. The server also checks its own rain statements against the rain gauges at public airports. It holds those statements for about a week, until the gauges are in. Then it keeps only how many were right, by day, region and kind of statement, for 400 days. No one's place or request feeds this. The server also checks the hourly forecast at those airports. It holds the forecast values for public airports for 3 days, until the reports are in. Then it keeps only counts by source and lead group for 400 days. These are public forecasts and the airports' own reports. Nothing about a person, a phone or a place anyone asked about goes into them. The separate table of public weather data, described below, is kept apart from these values.</p>
+<p>MicroSky keeps no personal data except what is listed above. Separately, MicroSky's server keeps a table of public weather data to improve its forecasts. It holds what NOAA's and ECMWF's open weather models predicted near about a hundred public airports, what the National Weather Service forecast for those airports, and what those airports reported. To fetch them the server contacts the public data servers of NOAA, ECMWF, the National Weather Service, the Iowa Environmental Mesonet and Google Cloud Storage. They see only the server's own address and the name MicroSky gives itself. That table is not the forecast values held for 3 days above. It holds public forecasts and reports, and nothing about you, your phone or your places. The table has no set end date. The NOAA files the job downloads to fill it are deleted after 1 day.</p>
 <h2>Good to know</h2>
 <ul>
 <li><strong>Cloudflare.</strong> Requests to the MicroSky server pass through Cloudflare. Cloudflare sees your internet address as part of delivering them, like any website does.
@@ -353,7 +374,7 @@
 </li>
 <li>It holds the address, and its network, only scrambled. It scrambles them with a random key it makes in memory each time it starts, and never writes down. The address is held beside the counts alone, never beside what was asked. It forgets them within a minute of the day ending.
 </li>
-<li>Tropical storms, the map's layers, tides, air quality and place names are counted the same way.
+<li>Tropical storms, the map's layers, the hourly model, tides, air quality and place names are counted the same way.
 </li>
 <li>A phone or watch with a day pass is counted by the tag the pass carries instead. It is counted the same way, and never by the key. Every pass asking from one connection together has at most ten allowances.
 </li>
@@ -370,6 +391,8 @@
 <li>Whether unsigned records count, and any change to it.
 </li>
 <li>The requests refused for want of a pass, where nothing else counts them.
+</li>
+<li>How many times the hourly model was asked for, by build family and by the answer: a model, part of one, or the plain forecast. It also counts answers cut short because a model file failed its checks. It names no person, device or place.
 </li>
 <li>How many times MicroSkyCast answered with each status, in one number for the day with no person, device or place. A refusal for want of a plan is counted as no plan sent, or as a plan sent and not accepted. For no plan sent, it also counts why your app had none to send, where it said. The reasons are no record of a plan, no key, no challenge from the server, a key that would not sign, or signing left for later. For a plan not accepted, it also counts why, for example a bad signature, a lapsed plan, or an install that is not a test install. Each reason is one of a few fixed words, with nothing that says who sent the read. A refusal for the day's limit is counted for one caller's limit or for everyone's. A good answer is counted as rain, dry, unknown or unavailable, or as unavailable because the setting is off or because one plan was read on too many devices.
 </li>
