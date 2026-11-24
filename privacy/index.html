@@ -12,7 +12,7 @@
     <img src="../icon.png" alt="">
     <div>
       <h1>Privacy Policy</h1>
-      <p class="lede">MicroSky, updated 23 November 2026</p>
+      <p class="lede">MicroSky, updated 24 November 2026</p>
     </div>
   </header>
   <nav><a href="../">Support</a><a href="./">Privacy Policy</a></nav>
@@ -47,8 +47,8 @@
 </li></ul>
 <p>The sections below say how each part works today. They can change as the app changes. The promises above change only with a new date at the top of this page.</p>
 <h2>Where you are stays on your phone</h2>
-<p>MicroSky divides the map into squares. Each square is about a kilometre across. (That is 0.01° of latitude and longitude.)</p>
-<p>When the app asks a weather service about a place, it asks about the middle of the square the place is in. It never asks about the place itself. Your phone works out the square. Your exact position is never sent. Your widgets follow the same rule when they update on their own. They may ask where you are, and fetch the weather, even when MicroSky is closed. A widget keeps where it found you only while My Location is on.</p>
+<p>MicroSky divides the map into squares. Each square is about a kilometre across. (That is 0.01° of latitude and longitude.) The middle of each square is a point with two decimal places, such as 43.05, -76.15.</p>
+<p>When the app asks a weather service about a place, it asks about the middle of the square the place is in. It never asks about the place itself. Your phone works out the square and sends only the point at its middle, with two decimal places. Apple counts a location written to fewer than three decimal places as coarse, not precise. Environment Canada's service takes a box, not a point, so for Canada the box is drawn around that same point, and says nothing more than the point does. Your exact position is never sent. Your widgets follow the same rule when they update on their own. They may ask where you are, and fetch the weather, even when MicroSky is closed. A widget keeps where it found you only while My Location is on.</p>
 <p>The middle of a square is always less than 800 metres from anywhere in the square. The forecast models behind MicroSky use grids about 1 to 13 kilometres across. So asking about the middle almost always gives the same forecast you would get at your door.</p>
 <p>Your exact position is still used, on your phone only, where a few hundred metres matter:</p>
 <ul>
@@ -108,9 +108,9 @@
 </li>
 <li><strong>For rain by the minute, MicroSkyCast, with a subscription and while Use MicroSky's Server is on.</strong> MicroSkyCast is MicroSky's own rain forecast. MicroSky makes it from NOAA's public radar. It does not come from NOAA or from Apple.
 <ul>
-<li>Your iPhone asks the MicroSky server about the square. Your watch shows what your iPhone read. The request names the square, about a kilometre across, and nothing else about the place. The server answers that it has nothing where its radar does not reach, which is everywhere outside the United States.
+<li>Your iPhone asks the MicroSky server about the square. Your watch shows what your iPhone read, and, while it would show the outlook itself, also asks the server about the square, with its own pass and its own key. The request names the square, about a kilometre across, and nothing else about the place. The server answers that it has nothing where its radar does not reach, which is everywhere outside the United States.
 </li>
-<li>The request carries Apple's signed record of your plan, and a signature from your phone's own key. They show that you subscribe. They do not say who you are. When your phone could not sign a read, the next read without a plan says why, once, in one of five fixed words, which names nothing about you.
+<li>The request carries Apple's signed record of your plan, and a signature from your phone's own key, or your watch's own key when your watch asks. They show that you subscribe. They do not say who you are. When your phone could not sign a read, the next read without a plan says why, once, in one of five fixed words, which names nothing about you.
 </li>
 <li>The server answers with words and a band: rain falling now, or likely within 15 or 30 minutes, and how hard. It does not send minutes or a time for the rain to start or stop, and the words are shown as sent, never counted down.
 </li>
@@ -280,7 +280,9 @@
 </li>
 <li>Every half hour it sends your phone a notification with nothing in it but a mark that says it is a wake. It sends none to a phone it has not heard from in 36 hours. That wakes MicroSky to refresh its weather and widgets. iOS decides whether to wake it.
 </li>
-<li>Turning it off, or removing the last widget, deletes the mark at the next check-in. The rest is kept only while a setting under While MicroSky Is Closed or the morning forecast uses it. The server deletes it all after 30 days without hearing from your phone.
+<li>On iOS 26 and later, on some days, your phone also sends a second token, which iOS gives your widgets. At first that is every other day. If it helps, it is most days. It is not tied to you. It holds no place and says nothing of which widgets you have. The server keeps it while it is sent. Every half hour it may send it a notification with nothing in it, which asks iOS to redraw your widgets. iOS decides whether to. Your phone measures, on the phone alone, whether this keeps your widgets fresher than the wake alone. It stops sending the token if it does not. It sends nothing of that measure.
+</li>
+<li>Turning it off, or removing the last widget, deletes the mark, and the widget token with it, at the next check-in. The rest is kept only while a setting under While MicroSky Is Closed or the morning forecast uses it. The server deletes it all after 30 days without hearing from your phone.
 </li></ul>
 </li>
 <li><strong>If you turn on the morning forecast.</strong>
@@ -450,13 +452,21 @@
 <li>Your iPhone and your watch tell each other today's high and low at each place, with the middle of the square each one read it for. Your iPhone also sends its current conditions there.
 </li>
 <li>Each one keeps only the latest the other sent. It is kept on the device until the next one replaces it, or you remove the place. Neither sends it anywhere else.
+</li>
+<li>It also sends the notices you chose: rain, severe alerts and freezes, and whether to use the MicroSky server. They stay on the two devices.
+</li>
+<li>While your iPhone is out of reach for about half an hour, your watch tells you those notices itself. It also registers with the MicroSky server as a device of its own, if you chose a notice the server watches. It sends its places as the middle of each 1 km square, its own random device ID, its own push token and your language. It does not say which iPhone it belongs to.
+</li>
+<li>When your iPhone is near again, your watch tells the server to watch nothing for it. The server forgets it after 30 days of silence, or at once when you turn all notices off or turn Use MicroSky's Server off.
+</li>
+<li>Your watch counts, on the watch only, how many rain notices came while it thought your iPhone was near. Over a small share, it stops asking the server for rain notices.
 </li></ul>
 </li>
 <li><strong>MET Norway and Environment Canada.</strong> The server cannot reach them directly. It reaches them through Cloudflare. Cloudflare passes on the same square and nothing more. It keeps nothing.
 </li></ul>
 <h2>What comes next</h2>
 <ol>
-<li><strong>Done: the 1 km square.</strong> Every request leaves your phone naming only the place's square. It names the middle of the square. For the server's merged forecast, it names the south-west corner.
+<li><strong>Done: the 1 km square.</strong> Every request leaves your phone naming only the place's square. It names the middle of the square, written to two decimal places.
 </li>
 <li><strong>Done: air quality from the server.</strong> The server reads the air quality for the United States from AirNow. It answers for your square, so your phone makes one small request.
 </li>
