@@ -218,11 +218,13 @@
 </li>
 <li>A random ID for your phone. It is not tied to you.
 </li>
+<li>A scrambled copy of a secret your phone made when it first registered. It is a hash, so the secret itself is not kept. Later changes are accepted only from the phone that knows the secret.
+</li>
 <li>Your phone's language and region (such as English, United States). This sets the words of its notices and how they write times.
 </li>
 <li>For a place whose alerts it watches: which national weather services they come from. Where they come from Environment Canada, DWD or MeteoAlarm's members, it also keeps your language, if it is one they write in. Then it can name their alerts in it, as the app does.
 </li>
-<li>Apple's push tokens, so it can reach your phone.
+<li>Apple's push tokens, so it can reach your phone. It also keeps a flag for which push service a token belongs to: the App Store's or the test builds'.
 </li>
 <li>A scrambled fingerprint of what your phone last sent. Then a daily check-in that changed nothing needs no work.
 </li>
@@ -265,7 +267,9 @@
 </li>
 <li>The server watches each place as it told your phone, never by these notes.
 </li>
-<li>It deletes each note 30 days after it last checked, at the next hourly tidy.
+<li>It deletes each note 3 days after it last checked, at the next hourly tidy.
+</li>
+<li>When the server deletes a row, it overwrites the bytes and empties its log of writes at once. It copies its disk once a day and keeps the last 3 copies, so for up to 3 days after a deletion the row can still be in a copy. Only MicroSky's developer can reach the copies. They serve only to recover from a failure.
 </li></ul>
 </li>
 <li><strong>If Keep Widgets Up to Date is on.</strong> It is on unless you turn it off, and it needs Use MicroSky's Server and a widget on your Home Screen, Lock Screen or StandBy.
